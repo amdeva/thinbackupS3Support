@@ -126,6 +126,10 @@ public class ThinBackupMgmtLink extends ManagementLink {
 
   public void doSaveSettings(final StaplerRequest res, final StaplerResponse rsp,
       @QueryParameter("backupPath") final String backupPath,
+      @QueryParameter("s3BucketName") final String s3BucketName,
+      @QueryParameter("s3Region") final String s3Region,
+      @QueryParameter("s3AccessKey") final String s3AccessKey,
+      @QueryParameter("s3SecretKey") final String s3SecretKey,
       @QueryParameter("fullBackupSchedule") final String fullBackupSchedule,
       @QueryParameter("diffBackupSchedule") final String diffBackupSchedule,
       @QueryParameter("nrMaxStoredFull") final String nrMaxStoredFull,
@@ -151,6 +155,10 @@ public class ThinBackupMgmtLink extends ManagementLink {
 
     final ThinBackupPluginImpl plugin = ThinBackupPluginImpl.getInstance();
     plugin.setBackupPath(backupPath);
+    plugin.setS3BucketName(s3BucketName);
+    plugin.setS3Region(s3Region);
+    plugin.setS3AccessKey(s3AccessKey);
+    plugin.setS3SecretKey(s3SecretKey);
     plugin.setFullBackupSchedule(fullBackupSchedule);
     plugin.setDiffBackupSchedule(diffBackupSchedule);
     plugin.setNrMaxStoredFullAsString(nrMaxStoredFull);

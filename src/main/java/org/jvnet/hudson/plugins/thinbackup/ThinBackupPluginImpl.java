@@ -41,6 +41,10 @@ public class ThinBackupPluginImpl extends Plugin {
 
   private static final Logger LOGGER = Logger.getLogger("hudson.plugins.thinbackup");
 
+  private String s3Region = "";
+  private String s3BucketName = "";
+  private String s3AccessKey = "";
+  private String s3SecretKey = "";
   private String fullBackupSchedule = "";
   private String diffBackupSchedule = "";
   private String backupPath = "";
@@ -84,6 +88,37 @@ public class ThinBackupPluginImpl extends Plugin {
       return null;
     }
     return jenkins.getRootDir();
+  }
+
+  public void setS3Region(final String s3Region) {
+    this.s3Region = s3Region;
+  }
+  public String getS3Region() {
+    return s3Region;
+  }
+
+  public void setS3BucketName(final String s3BucketName) {
+    this.s3BucketName = s3BucketName;
+  }
+
+  public String getS3BucketName() {
+    return s3BucketName;
+  }
+
+  public void setS3AccessKey(final String s3AccessKey) {
+    this.s3AccessKey = s3AccessKey;
+  }
+
+  public String getS3AccessKey() {
+    return s3AccessKey;
+  }
+
+  public void setS3SecretKey(final String s3SecretKey) {
+    this.s3SecretKey = s3SecretKey;
+  }
+
+  public String getS3SecretKey() {
+    return s3SecretKey;
   }
 
   public void setFullBackupSchedule(final String fullBackupSchedule) {

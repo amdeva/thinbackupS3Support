@@ -47,6 +47,7 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.jvnet.hudson.plugins.thinbackup.ThinBackupPeriodicWork.BackupType;
 import org.jvnet.hudson.plugins.thinbackup.ThinBackupPluginImpl;
 import org.jvnet.hudson.plugins.thinbackup.utils.ExistsAndReadableFileFilter;
+import org.jvnet.hudson.plugins.thinbackup.utils.S3Uploader;
 import org.jvnet.hudson.plugins.thinbackup.utils.Utils;
 
 import hudson.PluginWrapper;
@@ -56,6 +57,8 @@ import hudson.model.Run;
 import hudson.model.TopLevelItem;
 import hudson.util.RunList;
 import jenkins.model.Jenkins;
+
+import static org.jvnet.hudson.plugins.thinbackup.utils.S3Uploader.zipDirectory;
 
 public class HudsonBackup {
 
@@ -199,6 +202,20 @@ public class HudsonBackup {
       cleanupDiffs();
       moveOldBackupsToZipFile(backupDirectory);
       removeSuperfluousBackupSets();
+    }
+
+    try {
+      LOGGER.info("Starting Backup ....");
+      // Step 1: Zip the directory
+      zipDirectory(backupDirectory.getAbsolutePath(), backupDirectory.getAbsolutePath() + ".zip");
+      LOGGER.info("Directory zipped successfully: ");
+
+      // Step 2: Upload the zip file to S3
+      File backupFile = new File(backupDirectory.getAbsolutePath() + ".zip");
+      new S3Uploader(plugin).uploadFile(plugin.getS3BucketName(), "backups/" + backupFile.getName(), backupFile);
+      LOGGER.info("File uploaded successfully to S3: ");
+    } catch (Exception e){
+      LOGGER.log(Level.SEVERE, "Failed to upload backup", e);
     }
   }
 

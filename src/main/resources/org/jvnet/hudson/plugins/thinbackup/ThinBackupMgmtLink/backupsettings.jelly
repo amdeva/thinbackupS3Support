@@ -32,6 +32,31 @@
                         <f:textbox value="${it.configuration.backupPath}" name="backupPath"
                             checkUrl="'${rootURL}/plugin/thinBackup/checkBackupPath?value='+escape(this.value)"/>
                     </f:entry>
+
+
+                     <f:entry title="${%s3_region}" field="s3Region"
+                              help="/plugin/thinBackup/help/help-backupPath.html">
+                         <f:textbox value="${it.configuration.s3Region}" name="s3Region"
+                                    checkUrl="'${rootURL}/plugin/thinBackup/checkBackupPath?value='+escape(this.value)"/>
+                     </f:entry>
+
+                     <f:entry title="${%s3_bucket_name}" field="s3BucketName"
+                              help="/plugin/thinBackup/help/help-backupPath.html">
+                         <f:textbox value="${it.configuration.s3BucketName}" name="s3BucketName"
+                                    checkUrl="'${rootURL}/plugin/thinBackup/checkBackupPath?value='+escape(this.value)"/>
+                     </f:entry>
+
+                     <f:entry title="${%s3_access_key}" field="s3AccessKey"
+                              help="/plugin/thinBackup/help/help-backupPath.html">
+                         <f:password value="${it.configuration.s3AccessKey}" name="s3AccessKey"
+                                    checkUrl="'${rootURL}/plugin/thinBackup/checkBackupPath?value='+escape(this.value)"/>
+                     </f:entry>
+
+                     <f:entry title="${%s3_secret_key}" field="s3SecretKey"
+                              help="/plugin/thinBackup/help/help-backupPath.html">
+                         <f:password value="${it.configuration.s3SecretKey}" name="s3SecretKey"
+                                    checkUrl="'${rootURL}/plugin/thinBackup/checkBackupPath?value='+escape(this.value)"/>
+                     </f:entry>
                     
                     <f:entry title="${%full_backup_schedule}" field="fullBackupSchedule"
                         help="/plugin/thinBackup/help/help-fullBackupSchedule.html">
